@@ -1,0 +1,9 @@
+#!/bin/bash
+PROMPT=$(printf "shutdown\nreboot\nleave" | rofi -dmenu -theme default -p "Which option do you choose?")
+case $PROMPT in
+    "shutdown") shutdown now;;
+    "reboot")   reboot;;
+    "leave")    wm=$(wmctrl -m | awk '{ print $2 }' | head -1)
+                killall $wm;;
+    *) exit;;
+esac

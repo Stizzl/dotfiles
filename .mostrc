@@ -1,0 +1,9 @@
+unsetkey "j"
+unsetkey "k"
+
+setkey down "j"
+setkey up "k"
+setkey exit ":q"
+
+color status white gray
+color overstrike darkgreen magenta

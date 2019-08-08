@@ -1,0 +1,12 @@
+#!/bin/bash
+while getopts ":udlr" Option
+do
+  case $Option in
+    u    ) s=2;;
+    d    ) s=1;;
+    l    ) s=0;;
+    r    ) s=3;;
+  esac
+
+done
+xdotool mousemove --screen $s 500 28 click 1

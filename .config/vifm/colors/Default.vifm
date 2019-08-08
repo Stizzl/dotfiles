@@ -1,0 +1,26 @@
+" vim: filetype=vim :
+
+highlight clear
+
+highlight Border       cterm=none     ctermfg=none    ctermbg=235
+
+highlight TopLine      cterm=none     ctermfg=white ctermbg=234
+highlight TopLineSel   cterm=bold     ctermfg=default  ctermbg=default
+
+highlight StatusLine   cterm=none     ctermfg=white    ctermbg=238
+highlight WildMenu     cterm=none     ctermfg=default  ctermbg=153
+
+highlight CmdLine      cterm=none     ctermfg=white    ctermbg=234
+highlight ErrorMsg     cterm=none     ctermfg=35      ctermbg=default
+
+highlight  Win         cterm=none     ctermbg=none
+highlight  Directory   cterm=bold     ctermfg=35       ctermbg=234
+highlight  Link        cterm=none     ctermfg=94       ctermbg=default
+highlight  BrokenLink  cterm=bold     ctermfg=160      ctermbg=default
+highlight  Socket      cterm=bold     ctermfg=91       ctermbg=default
+highlight  Device      cterm=bold     ctermfg=52       ctermbg=default
+highlight  Fifo        cterm=bold     ctermfg=105      ctermbg=default
+highlight  Executable  cterm=bold     ctermfg=2 "ctermbg=234
+highlight  Selected    cterm=bold     ctermfg=default  ctermbg=237
+highlight  CurrLine    cterm=bold     ctermfg=238      ctermbg=white
+highlight  OtherLine   cterm=default  ctermfg=default  ctermbg=default

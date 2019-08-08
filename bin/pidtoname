@@ -1,0 +1,11 @@
+#!/bin/bash
+
+focused_window_id=$(xdotool getwindowfocus)
+active_window_id=$(xdotool getactivewindow)
+active_window_pid=$(xdotool getwindowpid "$active_window_id")
+
+Convert() {
+    ps -p $active_window_pid | awk '{ print $4 }' | tail -1
+}
+
+echo $(Convert)

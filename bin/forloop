@@ -1,0 +1,15 @@
+#!/bin/bash
+
+FILE1="$HOME/tmp/tmp1"
+FILE2="$HOME/tmp/tmp2"
+NUM1=$(grep -c "." $FILE1)
+NUM2=$(grep -c "." $FILE2)
+
+for (( i = 0; i <= $NUM1; i++ ))
+do
+    #head -n $i $FILE1 | tail -n 1 & head -n $i $FILE2 | tail -n 1
+    op1=$(head -n $i $FILE1 | tail -n 1)
+    op2=$(head -n $i $FILE2 | tail -n 1)
+    printf "$op1 -- $op2\n"
+    echo $i
+done

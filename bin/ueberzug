@@ -1,0 +1,21 @@
+#!/bin/bash
+#source "`ueberzug library`"
+
+ImageLayer 0< <(
+    ImageLayer::add [identifier]="example0" [x]="$2" [y]="$3" [max_width]="$4" [max_height]="$5" [path]="$1"
+    read
+)
+
+source "`ueberzug library`"
+
+# process substitution example:
+#ImageLayer 0< <(
+#    ImageLayer::add [identifier]="example0" [x]="0" [y]="0" [path]="$1"
+#    ImageLayer::add [identifier]="example1" [x]="10" [y]="0" [path]="$2"
+#    sleep 5
+#    ImageLayer::remove [identifier]="example0"
+#    sleep 5
+#)
+
+
+# group commands example:

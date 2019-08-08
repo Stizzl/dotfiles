@@ -1,0 +1,52 @@
+#!/bin/bash
+
+http='https://latin-dictionary.net/search/latin/'
+http1='https://latin-dictionary.net/search/english/'
+dir=/tmp
+FILE0=$dir/result
+FILE1=$dir/tmp1
+FILE2=$dir/tmp2
+
+printf "\033[0;33mFrom Latin to English [1] or English to Latin [2]\033[0m > "
+read language
+
+case $language in
+    1)
+    printf "\033[0;31mEnter Word in Latin\033[0m > "
+    read word
+    curl -Ls $http$word > $dir/http
+    awk '/<li>/ { print $1,$2,$3,$4,$5 }' $dir/http | sed "s/<li><sp.*//g; /^$/d" | sed "s/<li>//g;s/<\/li>//g" > $FILE0
+
+    if [[ -s $FILE0 ]]; then
+        printf "\n\033[0;34m$(cat $FILE0)\n\n"
+        rm -f $dir/http $FILE0
+    else
+        printf "\n\033[0;34mNothing found.\n\n"
+        rm -f $dir/http $FILE0
+        exit
+    fi
+    ;;
+    2)
+    printf "\033[0;31mEnter Word in English\033[0m > "
+    read word
+    curl -Ls $http1$word > $dir/tmp0
+    awk '/<h3/ { print $0 }' $dir/tmp0 | sed "s/<h3 class=\"cen.*//;s/<h3>My.*//;/^\s*$/d;s/.*\">//;s/<\/a.*//" > $dir/tmp1
+    awk '/<p class="s/ { print $0 }' $dir/tmp0 | sed "s/<p class=\"speech speech-//;s/\".*//" | awk '{ print $1 }' > $dir/tmp2
+
+    NUM1=$(grep -c "." $FILE1)
+    NUM2=$(grep -c "." $FILE2)
+
+    [[ $NUM1 -ne $NUM2 ]] && echo "Error. Numbers aren't equal or the word is incorrect." && exit
+    echo ""
+
+    for (( i = 1; i <= $NUM1; i++ )); do
+        op0=$(head -n $i $FILE1 | tail -n 1)
+        op1=$(head -n $i $FILE2 | tail -n 1)
+        printf "\033[0;34m$op0 \033[0;36m($op1)\n"
+    done
+    echo ""
+    ;;
+    *)
+    echo "Error. You have to type 1 or 2"
+    ;;
+esac

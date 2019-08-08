@@ -1,0 +1,22 @@
+#!/bin/bash
+
+DATE=$(date "+%Y-%m-%d")
+YEAR=$(date "+%Y")
+MONTH=$(date "+%m")
+DAY=$(date "+%d")
+DIR=$HOME/drd
+#active_window_id=$(xdotool getactivewindow)
+#active_window_pid=$(xdotool getwindowpid "$active_window_id")
+
+[ -d $HOME/drd ] || mkdir -p $HOME/drd
+
+echo -ne "Title: "
+read TITLE
+[ -f "$DIR/$DATE -- $TITLE" ] && echo -e "File already exists." && exit
+touch $HOME/tmp/dream.dy
+nvim $HOME/tmp/dream.dy
+cat $DIR/template/template1.tex $HOME/tmp/dream.dy $DIR/template/template2.tex > "$DIR/$DATE -- $TITLE.tex"
+pdflatex "$DIR/$DATE -- $TITLE.tex"
+cp "$DIR/$DATE -- $TITLE.tex" "$HOME/tmp/$DATE -- $TITLE.tex"
+sed -i "s|///|$TITLE|" "$DIR/$DATE -- $TITLE.tex"
+rm $DIR/*.aux $DIR/*.log $DIR/*.tex $HOME/tmp/dream.dy

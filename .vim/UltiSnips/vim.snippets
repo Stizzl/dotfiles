@@ -1,0 +1,11 @@
+snippet plug "Plugin - Vundle" b
+Plugin '${1:vim/plugin}'$0
+endsnippet
+snippet func "function in vim" b
+function! ${1:nameOfTheFunction}(${2:variable})
+	$0
+endfunction
+endsnippet
+snippet hi "highlight <class>" b
+hi ${1:Class} $2 ${3:ctermfg=$4} ${5:ctermbg=$6} ${8:cterm=$5}
+endsnippet

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+focused_window_id=$(xdotool getwindowfocus)
+active_window_id=$(xdotool getactivewindow)
+active_window_pid=$(xdotool getwindowpid "$active_window_id")
+
+echo "$active_window_pid"

@@ -1,0 +1,8 @@
+#!/bin/bash
+SCRIPT_FOLDER="$HOME/bin"
+SCRIPT_FILE="$SCRIPT_FOLDER/$1"
+
+if [[ -f $SCRIPT_FILE ]]; then
+    nvim $SCRIPT_FILE
+else
+    echo '#include <stdio.h>' > $SCRIPT_FILE

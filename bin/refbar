@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kill $(pstree -lp | grep whileloop.sh | sed "s/.*-//;s/sleep(//;s/)//")

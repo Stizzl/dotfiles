@@ -1,0 +1,7 @@
+#!/bin/sh
+x=$(xdotool getmouselocation --shell | head -1)
+y=$(xdotool getmouselocation --shell | head -2 | tail -1)
+#X=$(xdotool getmouselocation --shell | head -1 | sed "s/X=//")
+#Y=$(xdotool getmouselocation --shell | head -2 | tail -1 | sed "s/Y=//")
+notify-send -u Critical "$x $y"
+#echo $($X $Y) | xclip -selection clipboard

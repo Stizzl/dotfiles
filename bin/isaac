@@ -1,0 +1,14 @@
+#!/bin/sh
+
+[ -z $@ ] && echo Missing Argument. && exit
+
+[ $@ = "x" ] && xmodmap -pke > ~/tmp/backup.keymap
+
+if [ $@ = x ]; then
+    xmodmap -e "keycode 32 = Up"
+    xmodmap -e "keycode 45 = Left"
+    xmodmap -e "keycode 46 = Down"
+    xmodmap -e "keycode 47 = Right"
+else
+    xmodmap  ~/tmp/backup.keymap
+fi
