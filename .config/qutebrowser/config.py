@@ -13,14 +13,20 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
 # Bindings for normal mode
-config.bind('e', 'spawn mpv {url}')
-config.bind('E', 'hint links spawn mpv {hint-url}')
+config.bind('e', 'hint links spawn mpv {hint-url}')
+config.bind('E', 'spawn mpv {url}')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
+config.bind('<Space>n', 'open -p')
+config.bind('<Space>m', 'tab-mute')
+config.bind('<Space>f', 'spawn firefox {url}')
+config.bind('<Space>dh', 'hint links run download -d ~/pix/hen {hint-url}')
+config.bind('<Space>dm', 'hint links run download -d ~/pix/meme {hint-url}')
+config.bind('<Space>dt', 'hint links run download -d ~/pix/tmp {hint-url}')
 
 # External configuration
 c.tabs.position = "top"
-c.url.searchengines =   {"DEFAULT": "https://duckduckgo.com/?q={}", 
+c.url.searchengines =   {"DEFAULT": "https://start.duckduckgo.com/?q={}", 
                         "a": "https://wiki.archlinux.org/?search={}",
                         "y": "https://www.youtube.com/results?search_query={}",
                         "4": "https://boards.4channel.org/{}/",
