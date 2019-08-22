@@ -1,0 +1,21 @@
+#!/bin/bash
+main_dir="$HOME/tex/"
+date_month="$(date +%m)/"
+get_dir=$(ls -d $main_dir*/ | awk -v RS= '{print $0}')
+count_dir=$(ls -d $main_dir*/ | awk -v RS= '{print $0}' | awk '{print NR}' | tail -1)
+select_dir=$(ls -d $main_dir*/ | awk -v RS= '{print $0}' | dmenu)
+selected_dir="$select_dir"
+
+[ -z $selected_dir ] && exit
+
+working_dir="$select_dir$date_month"
+
+mkdir -p $working_dir
+
+printf "Title: "
+read title
+
+mkdir -p $working_dir$title
+touch $working_dir$title/$title.tex
+printf "$(date "+%A %Y-%m-%d %T")\n\n$working_dir$title" > $working_dir$title/metadata
+nvim $working_dir$title/$title.tex
