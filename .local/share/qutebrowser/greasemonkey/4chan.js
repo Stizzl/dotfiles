@@ -2,6 +2,7 @@
 // @name        4chan
 // @namespace   273465789236458792
 // @include     https://boards.4chan.org/*
+// @include     https://boards.4channel.org/*
 // @version     1
 // @grant       none
 // ==/UserScript==

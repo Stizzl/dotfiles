@@ -41,8 +41,10 @@ set menu-complete-display-prefix On
 "\C-j": history-search-backward
 "\C-k": history-search-forward
 "\C-x": kill-whole-line
+"\C-y": clear-screen
 
 "\es": "\eOHsudo \eOF"
 "\ew": "\eOHwhile :; do \eOF ; done\e[1;5D\eOD\eOD\eOD"
 "\ef": " &>/dev/null & disown"
 "\em": "\eOHman \eOF"
+"\et": "\eOHtime \eOF"

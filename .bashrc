@@ -1,6 +1,8 @@
 #fortune | cowsay #-f $(ls /usr/share/cows/ | shuf | head -1)
 #export PS1=" \[\e[34m\]\W\[\e[m\] > " #(old) \[\e[34m\][\[\e[m\]\[\e[35m\]\u\[\e[m\] \e[32m\]\w\[\e[m\]\[\e[34m\]]\[\e[m\]$ 
 source $HOME/.shell/prompt
+# echo acceleratrum -- accelerator
+# echo "to ignore a single file (pull): git update-index --assume-unchanged /path/to/file"
 
 shopt -s autocd
 
@@ -20,12 +22,17 @@ alias co="nvim ~/.bashrc"
 alias vco="nvim ~/.vimrc"
 alias ico="nvim ~/.config/i3/config"
 alias restart="systemctl restart NetworkManager"
-alias ll="ls -al"
+alias ll="ls -alh"
 alias sc="nvim ~/.config/bspwm/sxhkdrc"
 alias m="make && sudo make install"
 alias e="emacs"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# rmaf() {find . ! -name $1 -type f -exec rm -f {} +}
+# rmad() {find . ! -name $1 -type d -exec rm -fr {} +}
+alias afk="time afk"
+alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 
+pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
 
 testy()
@@ -45,6 +52,7 @@ testyyy()
     echo end of line
 }
 
+#{{{
 __fzf_history ()
 {
     builtin history -a;
@@ -80,3 +88,5 @@ __fzf_history ()
 builtin set -o histexpand;
 builtin bind -x '"\C-x1": __fzf_history';
 builtin bind '"\C-r": "\C-x1\e^\er"'
+#}}}
+# vim:foldmethod=marker:foldlevel=0

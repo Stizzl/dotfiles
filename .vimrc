@@ -17,7 +17,7 @@ set shiftwidth=4
 set splitbelow splitright
 set cursorline
 set cursorcolumn
-set nowrap
+"set nowrap
 set updatetime=1000
 set path+=**	"find will find subfolders outside your working tree
 set wildmenu	"tabmenu
@@ -89,12 +89,12 @@ let g:limelight_conceal_ctermfg = 240
 let g:limelight_default_coefficient = 0.7
 
 " auto-pairs
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<M-b>'
+"let g:AutoPairsFlyMode = 1
+"let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " latex-live-preview
 let g:livepreview_previewer = 'zathura'
-"let g:livepreview_cursorhold_recompile = 0
+let g:livepreview_cursorhold_recompile = 0
 
 " airline
 let g:airline_theme = 'bubblegum'
@@ -117,7 +117,7 @@ let g:deoplete#enable_at_startup = 1
 let g:fzf_layout = { 'down': '~33%' }
 
 " easymotion
-let g:EasyMotion_keys = "asdghklqwertyuiopzxcvbnjfa"
+let g:EasyMotion_keys = "asdfghjkl"
 
 "}}}
 
@@ -145,7 +145,7 @@ tmap <C-k> <Esc><C-w>k
 tmap <C-l> <Esc><C-w>l
 
 " function keys
-map <F1> :!bspc node -t ~fullscreen<CR><CR>:Goyo<CR>:Limelight<CR>
+map <F1> :Goyo<CR>:Limelight<CR>
 map <F2> :LLPStartPreview<CR>
 map <F3> :NERDTreeToggle<CR>
 map <F6> :setlocal spell! spelllang=de_de<CR>
@@ -159,9 +159,8 @@ map <F13> :Goyo!<CR>:Limelight!<CR>
 
 " essential settings
 "altgr + l
-inoremap ł <Esc>/<++><Enter>"_c4l
 map <M-v> <Esc>"+pa
-map <C-t> :vs term://bash<CR>
+map <C-t> :vs term://bash<CR>a
 
 map <C-s> :wq<CR>
 map <C-S> :q!<CR>
@@ -171,60 +170,32 @@ vmap <silent> < <gv
 vmap <silent> > >gv
 nmap <silent> <Esc> :noh<CR>
 
+noremap <silent> <S-j> <Esc>:m +1<CR>
+noremap <silent> <S-k> <Esc>:m -2<CR>
+vnoremap <silent> <S-j> dp<CR>k1v
+vnoremap <silent> <S-k> :m -2<CR>gv
+
+noremap <silent> j gj
+noremap <silent> k gk
+
+" When I accidentally type :Q
+cmap Q quit
+
+noremap <leader>u :UltiSnipsEdit<CR>G
+
 "autocmd BufEnter *.tex silent! !pdflatex %
 autocmd BufWritePost *vimisgreat.gg silent! !echo % | sed "s/\.gg//" > ~/yoyoma
 autocmd BufWritePost *.sh silent! !chmod +x %
 autocmd BufWritePost *.bashrc silent! !source ~/.bashrc
-autocmd BufNew *.tex LLPStartPreview
+"autocmd BufEnter *.tex LLPStartPreview 
+"autocmd BufEnter *.tex !sleep 1s && xdotool key super+shift+j &
 "autocmd FileType plaintex :set filetype=tex
-
-noremap <silent> <S-k> <Esc>:m -2<CR>
-noremap <silent> <S-j> <Esc>:m +1<CR>
 
 " }}}
 
-" snippets {{{
+" settings {{{
 
-"   ____        _                  _
-"  / ___| _ __ (_)_ __  _ __   ___| |_ ___
-"  \___ \| '_ \| | '_ \| '_ \ / _ \ __/ __|
-"   ___) | | | | | |_) | |_) |  __/ |_\__ \
-"  |____/|_| |_|_| .__/| .__/ \___|\__|___/
-"                |_|   |_|
-
-" let autocmd FileType work
-filetype plugin on
-filetype on
-syntax enable
-syntax on
-
-autocmd FileType blank,sh inoremap <M-b> <Esc>I# 
-autocmd FileType blank,sh nnoremap <M-b> I# 
-autocmd FileType vim inoremap <M-b> <Esc>I"<Del> 
-autocmd FileType vim nnoremap <M-b> I"<Del> 
-autocmd FileType cpp,c,h inoremap <M-b> <Esc>I// 
-autocmd FileType cpp,c,h nnoremap <M-b> I// 
-
-" .tex
-"autocmd FileType tex,plaintex inoremap §al \documentclass[11pt]{}<Enter><Enter>\usepackage{amsfonts}<Enter>\usepackage{amsmath}<Enter>\usepackage{geometry}<Enter>\geometry{a4paper}<Enter>\usepackage{tikz}<Enter>\usepackage[backend=biber]{biblatex}<Enter>\addbibresource{~/LaTeX/lib.bib}<Enter>\usetikzlibrary{shapes.geometric, arrows}<Enter><Enter>\renewcommand{\figurename}{Abb.}<Enter><Enter>\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{arrow} = [thick,->,>=stealth]<Enter><Enter>\author{Finn Sauer}<Enter>\title{<++>}<Enter><Enter>\begin{document}<Enter><Enter><++><Enter><Enter>\end{document}<Esc>ggf{a
-autocmd FileType tex,plaintex inoremap §al \documentclass[11pt]{}<Enter><Enter>\usepackage[a4paper]{geometry}<Enter>\usepackage{fancyhdr}<Enter>\usepackage{graphics}<Enter>\usepackage{float}<Enter><Enter>\pagestyle{fancy}<Enter>\fancyhead{}<Enter>\fancyfoot{}<Enter>\fancyhead[L]{\slshape \MakeUppercase{<++>}}<Enter>\fancyhead[R]{\slshape <++>}<Enter>\fancyfoot[R]{\MakeUppercase{\romannumeral\thepage}}<Enter><Enter>\begin{document}<Enter><Enter><++><Enter><Enter>\end{document}<Esc>ggf{a
-autocmd FileType tex,plaintex inoremap §tz <Esc>6GI\usepackage{tikz}<Enter><Enter>\renewcommand{\figurename}{Abb.}<Enter><Enter>\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=white!20]<Enter>\tikzstyle{arrow} = [thick,->,>=stealth]<Enter><Esc>/begin{document}<Enter>02jI
-autocmd FileType tex,plaintex inoremap §ti \begin{figure}<Enter>\begin{center}<Enter>\begin{tikzpicture}[node distance=2cm]<Enter><Enter><Enter><Enter>\end{tikzpicture}<Enter>\end{center}<Enter>\caption{<++>}<Enter>\end{figure}<Enter><Enter><++><Esc>7ki
-autocmd FileType tex,plaintex inoremap §no \node () [<++>] {<++>};<Enter><++><Esc>kf(a
-autocmd FileType tex,plaintex inoremap §dr \draw [arrow] () -- <++>(<++>);<Enter><++><Esc>kf(a
-autocmd FileType tex,plaintex inoremap §ol \begin{enumerate}<Enter>\item <Enter><++><Enter>\end{enumerate}<Enter><Enter><++><Esc>4kA
-autocmd FileType tex,plaintex inoremap §ul \begin{itemize}<Enter>\item <Enter><++><Enter>\end{itemize}<Enter><Enter><++><Esc>4kA
-autocmd FileType tex,plaintex inoremap §li \item <Enter><++><Esc>kA
-autocmd FileType tex,plaintex inoremap <F2> \textbf{} <++><Esc>F{a
-autocmd FileType tex,plaintex inoremap <F3> \textit{} <++><Esc>F{a
-autocmd FileType tex,plaintex inoremap <F4> \texttt{} <++><Esc>F{a
-
-" .bib
-autocmd FileType bib inoremap §bp @book{,<Enter><Tab>title = "<++>",<Enter><Tab>author = "<++>",<Enter><Tab>publisher = "<++>"<Enter>}<Esc>5kf{a
-autocmd FileType bib inoremap §by @book{,<Enter><Tab>title = "<++>",<Enter><Tab>author = "<++>",<Enter><Tab>year = "<++>"<Enter>}<Esc>5kf{a
-
-" .cpp
-autocmd FileType cpp inoremap §al #include <iostream><Enter><Enter>
+let g:tex_flavor = "latex"
 
 " }}}
 
