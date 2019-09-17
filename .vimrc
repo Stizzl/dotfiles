@@ -51,6 +51,7 @@ call vundle#begin()
     Plugin 'Shougo/deoplete.nvim'
     Plugin 'tomtom/tcomment_vim'
 	Plugin 'easymotion/vim-easymotion'
+    Plugin 'lervag/vimtex'
 call vundle#end()
 
 
@@ -104,9 +105,10 @@ let g:airline_section_y = 'BN: %{bufnr("%")}'
 " let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<C-b>"
+" let g:UltiSnipsExpandTrigger="<C-b>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetsDir = "~/.vim/UltiSnips"
 let g:UltiSnipsEditSplit="vertical"
 
@@ -115,6 +117,13 @@ let g:deoplete#enable_at_startup = 1
 
 " fzf
 let g:fzf_layout = { 'down': '~33%' }
+
+" vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 " easymotion
 let g:EasyMotion_keys = "asdfghjkl"
@@ -130,6 +139,7 @@ colorscheme magala
 " keybindings & autocmd {{{
 
 let mapleader=" "
+let maplocalleader=" "
 
 map <leader>m :!echo yo
 nmap s <Plug>(easymotion-s)

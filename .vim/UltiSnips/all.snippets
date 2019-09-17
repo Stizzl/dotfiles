@@ -1,4 +1,11 @@
 snippet shell "this is a test" b
 /* Current time is: `date` Note: ${1:description} */
-$1
+Another Test $2
+$0
+endsnippet
+snippet box "Box"
+`!p snip.rv = '┌' + '─' * (len(t[1]) + 2) + '┐'`
+│ $1 │
+`!p snip.rv = '└' + '─' * (len(t[1]) + 2) + '┘'`
+$0
 endsnippet
