@@ -1,0 +1,19 @@
+#set default-bg "#222222"
+#set default-fg "#222222"
+#set recolor-darkcolor "#222222"
+# set recolor-lightcolor "#222222"
+
+set recolor true
+set recolor-darkcolor "#FFFFFF"
+set recolor-lightcolor "#2E3440"
+
+map u scroll half-up
+map d scroll half-down
+map d toggle_index
+map D toggle_page_mode
+map r reload
+map R rotate
+map K zoom in
+map J zoom out
+map i recolor
+map p print

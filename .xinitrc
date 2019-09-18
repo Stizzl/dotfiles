@@ -14,7 +14,7 @@ sxhkd &
 mpd &
 dunst &
 setxkbmap -layout de -option caps:ctrl_modifier &
-xcape -e 'Caps_Lock=Escape'
+xcape -e 'Caps_Lock=Escape' &
 xmodmap .Xmodmap &
 feh --bg-scale $BACKGROUND &
 exec dwm
