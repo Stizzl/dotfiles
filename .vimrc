@@ -9,11 +9,12 @@
 
 set encoding=utf-8
 set relativenumber number
+" set numberwidth=2
 set expandtab
 set tabstop=4
 set shiftwidth=4
-"set noswapfile
-"set nobackup
+set noswapfile
+set nobackup
 set splitbelow splitright
 set cursorline
 set cursorcolumn
@@ -22,6 +23,8 @@ set updatetime=1000
 set path+=**	"find will find subfolders outside your working tree
 set wildmenu	"tabmenu
 set lazyredraw  "doesn't update screen when executing a macro or script
+set hlsearch
+set incsearch
 
 " }}}
 
@@ -47,11 +50,11 @@ call vundle#begin()
     Plugin 'scrooloose/nerdtree'
     Plugin 'axvr/photon.vim'
     Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
+    " Plugin 'honza/vim-snippets'
     Plugin 'Shougo/deoplete.nvim'
     Plugin 'tomtom/tcomment_vim'
 	Plugin 'easymotion/vim-easymotion'
-    Plugin 'lervag/vimtex'
+    " Plugin 'lervag/vimtex'
 call vundle#end()
 
 
@@ -122,8 +125,8 @@ let g:fzf_layout = { 'down': '~33%' }
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
+" set conceallevel=1
+" let g:tex_conceal='abdmg'
 
 " easymotion
 let g:EasyMotion_keys = "asdfghjkl"
@@ -200,6 +203,8 @@ autocmd BufWritePost *.bashrc silent! !source ~/.bashrc
 "autocmd BufEnter *.tex LLPStartPreview 
 "autocmd BufEnter *.tex !sleep 1s && xdotool key super+shift+j &
 "autocmd FileType plaintex :set filetype=tex
+
+noremap <leader>e :write tmp.vim<CR>:source %<CR>:!rm %<CR><CR>
 
 " }}}
 

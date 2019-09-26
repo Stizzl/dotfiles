@@ -24,6 +24,7 @@ config.bind('<Space>f', 'hint links run spawn firefox {hint-url}')
 config.bind('<Space>dh', 'hint links run download -d ~/pix/hen {hint-url}')
 config.bind('<Space>dm', 'hint links run download -d ~/pix/meme {hint-url}')
 config.bind('<Space>dt', 'hint links run download -d ~/pix/tmp {hint-url}')
+config.bind('<Space>dc', 'hint links run download -d ~/pix/moe {hint-url}')
 
 # Basics
 config.set('content.notifications', False)
@@ -39,7 +40,8 @@ c.url.searchengines =   {"DEFAULT": "https://start.duckduckgo.com/?q={}",
                         "a": "https://wiki.archlinux.org/?search={}",
                         "y": "https://www.youtube.com/results?search_query={}",
                         "4": "https://boards.4channel.org/{}/",
-			"r": "https://www.reddit.com/r/{}/"}
+			"r": "https://www.reddit.com/r/{}/",
+			"g": "https://github.com/search?q={}"}
 
 # jmatrix
 # import sys, os

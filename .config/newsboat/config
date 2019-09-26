@@ -2,7 +2,7 @@
 auto-reload yes
 
 #external-url-viewer "urlscan -dc -r 'linkhandler {}'"
-external-url-viewer "firefox"
+external-url-viewer "qutebrowser"
 
 bind-key j down
 bind-key k up
@@ -31,7 +31,7 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-#browser elinks
+# browser "qutebrowser %u"
 #macro , open-in-browser
 #macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
 macro t set browser "transmission-remote -a %u"; open-in-browser ; set browser "elinks %u"
