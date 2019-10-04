@@ -38,13 +38,13 @@ set menu-complete-display-prefix On
 #set echo-control-characters off
 
 ## see `bind -p`
-"\C-j": history-search-backward
-"\C-k": history-search-forward
+"\C-k": history-search-backward
+"\C-j": history-search-forward
 "\C-x": kill-whole-line
 "\C-y": clear-screen
 
 "\es": "\eOHsudo \eOF"
 "\ew": "\eOHwhile :; do \eOF ; done\e[1;5D\eOD\eOD\eOD"
-"\ef": " &>/dev/null & disown"
+"\ef": "\eOF &>/dev/null & disown"
 "\em": "\eOHman \eOF"
 "\et": "\eOHtime \eOF"

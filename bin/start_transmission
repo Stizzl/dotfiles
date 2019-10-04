@@ -2,6 +2,7 @@
 PID=$(pstree -lp | grep transmission | sed "s/.*(//;s/)//")
 if [ -z $PID ]; then
     transmission-daemon
+    $HOME/.gem/ruby/2.6.0/gems/transmission-rss-1.1.0/bin/transmission-rss
 else
     exit
 fi
