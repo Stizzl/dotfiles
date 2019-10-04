@@ -1,8 +1,4 @@
-#fortune | cowsay #-f $(ls /usr/share/cows/ | shuf | head -1)
-#export PS1=" \[\e[34m\]\W\[\e[m\] > " #(old) \[\e[34m\][\[\e[m\]\[\e[35m\]\u\[\e[m\] \e[32m\]\w\[\e[m\]\[\e[34m\]]\[\e[m\]$ 
-source $HOME/.shell/prompt
-# echo acceleratrum -- accelerator
-# echo "to ignore a single file (pull): git update-index --assume-unchanged /path/to/file"
+source $HOME/.prompt/bash_prompt
 
 shopt -s autocd
 
@@ -27,30 +23,11 @@ alias sc="nvim ~/.config/bspwm/sxhkdrc"
 alias m="make && sudo make install"
 alias e="emacs"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-# rmaf() {find . ! -name $1 -type f -exec rm -f {} +}
-# rmad() {find . ! -name $1 -type d -exec rm -fr {} +}
 alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
-
-testy()
-{
-    [[ -z $@ ]] && return 0
-    for (( i = 1; i <= $@; i++ )); do
-        cd ..
-    done
-}
-
-testyyy()
-{
-    echo Yo, Angelo!
-    echo $@
-    echo $1
-    echo $2
-    echo end of line
-}
 
 #{{{
 __fzf_history ()
@@ -89,4 +66,5 @@ builtin set -o histexpand;
 builtin bind -x '"\C-x1": __fzf_history';
 builtin bind '"\C-r": "\C-x1\e^\er"'
 #}}}
+
 # vim:foldmethod=marker:foldlevel=0

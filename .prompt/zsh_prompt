@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# prompt_timestamp() {
+#     date +%s%N
+# }
+#
+# preexec() {
+#     timer=${timer:-$(prompt_timestamp)}
+# }
+#
+# precmd() {
+#
+# 	local timestring
+#     local delta_us=$(( ($(prompt_timestamp) - timer) / 1000 ))
+# 	local ms=$(((delta_us / 1000) % 1000))
+# 	local s=$(((delta_us / 1000000) % 1000))
+# 	# local s=$((delta_us / 1000000))
+# 	# local s=$(((delta_us / 1000000) % 60))
+#
+# 	timestring="$(( s >= 1 ? s : ms ))"
+#
+# 	timestring="$(printf '%03d' $timestring)"
+#
+#     [ $s -ge 1 ] && \
+# 		PS1=" %{$fg[magenta]%}$timestring %{$fg[blue]%}%1d%{$fg[white]%} >" \
+#     || \
+# 		PS1=" %{$fg[cyan]%}$timestring %{$fg[blue]%}%1d%{$fg[white]%} >"
+#
+# 	unset timer
+# }
+
+precmd() {
+    Pwd() {
+        x=$(pwd | sed "s|.*/||")
+
+        if [ "$x" = "finn" ]; then
+            printf "~"
+        else
+            printf "$x"
+        fi
+    }
+
+    PS1=" %{$fg[blue]%}$(Pwd)%{$fg[white]%} > "
+}
+# zsh
+# %{$fg[COLOR]%}
+
+# OLD 
+#  \[\e[34m\]\W\[\e[m\] > 

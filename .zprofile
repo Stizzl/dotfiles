@@ -9,9 +9,6 @@ export HISTSIZE=""
 export LANG="en_US.UTF-8"
 #export XDG_CONFIG_HOME="$HOME/.config"
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+[ -f ~/.zshrc ] && . ~/.zshrc
 
-# fix of tmux in correlation of xorg
-if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-  startx
-fi
+startx
