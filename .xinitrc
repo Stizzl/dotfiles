@@ -3,8 +3,6 @@
 ~/.scripts/dwmrefresh.sh &
 ~/.scripts/display.sh &
 ~/.scripts/headphonejack.sh &
-#numlockx &
-#sudo rfkill block bluetooth
 start_transmission &
 unclutter --timeout 1 &
 xset r rate 300 50 &

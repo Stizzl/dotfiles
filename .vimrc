@@ -25,6 +25,7 @@ set wildmenu	"tabmenu
 set lazyredraw  "doesn't update screen when executing a macro or script
 set hlsearch
 set incsearch
+set spelllang=en,de
 
 " }}}
 
@@ -55,6 +56,7 @@ call vundle#begin()
     Plugin 'tomtom/tcomment_vim'
 	Plugin 'easymotion/vim-easymotion'
     " Plugin 'lervag/vimtex'
+    Plugin 'dracula/vim'
 call vundle#end()
 
 
@@ -101,7 +103,7 @@ let g:livepreview_previewer = 'zathura'
 let g:livepreview_cursorhold_recompile = 0
 
 " airline
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = 'BN: %{bufnr("%")}'
 " let g:airline#extensions#tabline#enabled = 1
@@ -135,7 +137,14 @@ let g:EasyMotion_keys = "asdfghjkl"
 
 " color-scheme{{{
 
-colorscheme magala
+colorscheme dracula
+" hi! Normal ctermbg=NONE
+" hi! NonText ctermbg=NONE
+
+augroup vimrc
+    autocmd!
+    autocmd ColorScheme * highlight Normal ctermbg=NONE | highlight NonText ctermbg=NONE | highlight CursorLine ctermbg=NONE | highlight FoldColumn ctermfg=238 ctermbg=NONE | highlight Folded ctermfg=61 ctermbg=NONE
+augroup END
 
 " }}}
 
@@ -170,13 +179,9 @@ map <F12> :bd!<CR>:find ~/.vimrc<CR>
 tmap <F12> <Esc>:bd!<CR>:find ~/.vimrc<CR>
 map <F13> :Goyo!<CR>:Limelight!<CR>
 
-" essential settings
-"altgr + l
 map <M-v> <Esc>"+pa
-map <C-t> :vs term://bash<CR>a
+map <C-t> :vs term://zsh<CR>a
 
-map <C-s> :wq<CR>
-map <C-S> :q!<CR>
 tmap <Esc> <C-\><C-n><Esc><CR>
 
 vmap <silent> < <gv

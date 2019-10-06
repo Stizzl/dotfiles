@@ -11,4 +11,7 @@ export LANG="en_US.UTF-8"
 
 [ -f ~/.zshrc ] && . ~/.zshrc
 
-startx
+# fix of tmux in correlation of xorg
+if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
+  startx
+fi

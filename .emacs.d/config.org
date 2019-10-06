@@ -1,0 +1,322 @@
+* VIM-Mode
+** Evil
+#+begin_src emacs-lisp :tangle yes
+  (require 'evil)
+  (evil-mode 1)
+#+end_src
+** Powerline
+#+begin_src emacs-lisp :tangle yes
+;  (require 'powerline)
+;  (powerline-evil-vim-color-theme)
+#+end_src
+** Spaceline
+#+begin_src emacs-lisp :tangle yes
+  (use-package spaceline
+    :ensure t
+    :config
+    (require 'spaceline-config)
+    (setq powerline-default-separator (quote arrow))
+    (spaceline-spacemacs-theme))
+#+end_src
+*** diminish
+#+begin_src emacs-lisp :tangle yes
+  (use-package diminish
+    :ensure t
+    :init
+    (diminish 'undo-tree-mode)
+    (diminish 'autopair-mode)
+    (diminish 'eldoc-mode)
+    (diminish 'page-break-lines-mode))
+#+end_src
+* Quality of Life
+#+begin_src emacs-lisp :tangle yes
+  ;; tabs
+  ;; (setq-default indent-tabs-mode nil)
+  ;; (setq-default tab-width 4)
+
+  (setq ring-bell-function 'ignore)
+  (blink-cursor-mode nil)
+
+  ;; set transparency
+  (set-frame-parameter (selected-frame) 'alpha '(92 92))
+  (add-to-list 'default-frame-alist '(alpha 92 92))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; LOOK INTO
+;  (setq-default header-line-format mode-line-format)
+;  (setq-default mode-line-format nil)
+#+end_src
+** Autopair
+#+begin_src emacs-lisp :tangle yes
+  (autopair-global-mode t)
+#+end_src
+* Org-Mode
+** Basic Comfig
+#+begin_src emacs-lisp :tangle yes
+  (setq org-src-window-setup 'current-window)
+#+end_src
+** Org Bullets
+#+begin_src emacs-lisp :tangle yes
+  (use-package org-bullets
+    :ensure t
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode))))
+#+end_src
+* Keybindings
+#+begin_src emacs-lisp :tangle yes
+  (define-key global-map (kbd "C-c w") 'iedit-mode)
+  
+  ;; Jump to insertet charactar
+  (global-set-key (kbd "M-s") 'avy-goto-char)
+  (global-set-key (kbd "C-c c") 'comment-line)
+#+end_src
+* Emacs-Autosave
+** Backup('~')
+#+begin_src emacs-lisp :tangle yes
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+  )
+#+end_src
+** Autosave('#')
+#+begin_src emacs-lisp :tangle yes
+(add-to-list 'kill-emacs-query-functions #'my-confirm-kill-emacs)
+
+(defun my-confirm-kill-emacs ()
+"Get confirmation..."
+(let ((bufs  (cl-remove-if-not (lambda (buf)                                       
+(and (buffer-file-name buf)
+(buffer-modified-p buf)))
+(buffer-list)))
+autosave-name)
+(and bufs
+(dolist (buf  bufs)
+(setq autosave-name  (with-current-buffer buf (make-auto-save-file-name)))
+(when (and (file-exists-p autosave-name)
+(y-or-n-p (format "Delete autosave file `%s' " autosave-name)))
+(delete-file autosave-name)
+(message "File `%s' deleted" autosave-name) (sit-for 0.5)))))
+t)   
+#+end_src
+
+* EXWM
+** Main
+#+begin_src emacs-lisp :tangle yes
+  (use-package exwm
+    :ensure t
+    :config
+    (require 'exwm-config)
+    (exwm-config-default))
+  
+  (display-time-mode 1)
+  (display-battery-mode 1)
+  (setq display-time-string-forms '((format-time-string "%H:%M" now)))
+#+end_src
+** Variables
+#+begin_src emacs-lisp :tangle yes
+  (defvar exwm--terminal-command "st"
+      "Terminal command to run.")
+      
+  (defvar exwm-app-launcher--prompt "$ "
+      "Prompt for the EXWM application launcher")
+
+  (defvar exwm--rofi-command "rofi -modi \"run,ssh\" -show run -font \"Input Mono Compressed 10\""
+      "Command to start rofi launcher")
+
+  (defvar exwm--hide-tiling-modeline t
+      "Whether to hide modeline.")
+#+end_src
+** Systray
+#+begin_src emacs-lisp :tangle yes
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+#+end_src
+** Keybindings
+#+begin_src emacs-lisp :tangle yes
+  (defun my-exwm-bind-command (key command &rest bindings)
+      (while key
+      (exwm-input-set-key (kbd key)
+			  `(lambda ()
+			      (interactive)
+			      (start-process-shell-command ,command nil ,command)))
+      (setq key     (pop bindings)
+	      command (pop bindings))))
+
+  (my-exwm-bind-command "<s-return>"  exwm--terminal-command)
+  (my-exwm-bind-command "<s-space>"  exwm-app-launcher--prompt)
+  (my-exwm-bind-command "s-d"  exwm--rofi-command)
+
+  ;; + Application launcher ('M-&' also works if the output buffer does not
+  ;;   bother you). Note that there is no need for processes to be created by
+  ;;   Emacs.
+  (defun my-exwm-application-launcher (command)
+      "Launches an application in your PATH.
+  Can show completions at point for COMMAND using helm or ido"
+      (interactive (list (read-shell-command exwm-app-launcher--prompt)))
+      (start-process-shell-command command nil command))
+
+  (exwm-input-set-key (kbd "s-SPC") #'my-exwm-application-launcher)
+
+  ;; `exwm-input-set-key' allows you to set a global key binding (available in
+  ;; any case). Following are a few examples.
+
+  (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
+  (exwm-input-set-key (kbd "<s-tab>") #'exwm-jump-to-last-exwm)
+  ;; + Bind a key to switch workspace interactively
+  (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
+
+  ;; Preserve the habit
+  (exwm-input-set-key (kbd "s-:") 'helm-M-x)
+  (exwm-input-set-key (kbd "s-;") 'evil-ex)
+  ;; Shell (not a real one for the moment)
+  (exwm-input-set-key (kbd "C-'") #'spacemacs/default-pop-shell)
+  ;; Undo window configurations
+  (exwm-input-set-key (kbd "s-u") #'winner-undo)
+  (exwm-input-set-key (kbd "S-s-U") #'winner-redo)
+  ;; Change buffers
+  (exwm-input-set-key (kbd "s-b") #'helm-mini)
+  ;; Focusing windows
+  (exwm-input-set-key (kbd "s-h") #'evil-window-left)
+  (exwm-input-set-key (kbd "s-j") #'evil-window-down)
+  (exwm-input-set-key (kbd "s-k") #'evil-window-up)
+  (exwm-input-set-key (kbd "s-l") #'evil-window-right)
+  ;; Moving Windows
+  (exwm-input-set-key (kbd "s-H") #'evil-window-move-far-left)
+  (exwm-input-set-key (kbd "s-J") #'evil-window-move-very-bottom)
+  (exwm-input-set-key (kbd "s-K") #'evil-window-move-very-top)
+  (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
+  ;; Resize
+  ;(exwm-input-set-key (kbd "M-s-h") #'spacemacs/shrink-window-horizontally)
+  ;(exwm-input-set-key (kbd "M-s-j") #'spacemacs/shrink-window)
+  ;(exwm-input-set-key (kbd "M-s-k") #'spacemacs/enlarge-window)
+  ;(exwm-input-set-key (kbd "M-s-l") #'spacemacs/enlarge-window-horizontally)
+  ; (defun spawn-st ()
+  ;   (interactive)
+  ;   (shell-command "st"))
+  ;
+  ; (exwm-input-set-key (kbd "s-<return>") 'spawn-st)
+#+end_src
+** Char-/Linemode
+#+begin_src emacs-lisp :tangle yes
+  ;send all keypresses to emacs in line mode
+;  (setq exwm-input-line-mode-passthrough t)
+;
+;    (defun exwm-input-line-mode ()
+;      "Set exwm window to line-mode and show mode line"
+;      (call-interactively #'exwm-input-grab-keyboard)
+;      (exwm-layout-show-mode-line))
+;
+;    (defun exwm-input-char-mode ()
+;      "Set exwm window to char-mode and hide mode line"
+;      (call-interactively #'exwm-input-release-keyboard)
+;      (exwm-layout-hide-mode-line))
+;
+;    (defun exwm-input-toggle-mode ()
+;      "Toggle between line- and char-mode"
+;      (with-current-buffer (window-buffer)
+;	(when (eq major-mode 'exwm-mode)
+;	  (if (equal (second (second mode-line-process)) "line")
+;	      (exwm-input-char-mode)
+;	    (exwm-input-line-mode)))))
+;
+;    (exwm-input-set-key (kbd "s-i")
+;			(lambda () (interactive)
+;			  (exwm-input-toggle-mode)))
+#+end_src
+** Windows
+#+begin_src emacs-lisp :tangle yes
+  ;; Rename buffer to window title
+  (defun exwm-rename-buffer-to-title () (exwm-workspace-rename-buffer exwm-title))
+  (add-hook 'exwm-update-title-hook 'exwm-rename-buffer-to-title)
+
+  ;; no mode line for floating windows
+  (add-hook 'exwm-floating-setup-hook 'exwm-layout-hide-mode-line)
+  (add-hook 'exwm-floating-exit-hook 'exwm-layout-show-mode-line)
+#+end_src
+** Xrandr
+#+begin_src emacs-lisp :tangle yes
+  (require 'exwm-randr)
+  (setq exwm-randr-workspace-output-plist '(1 "DP-1"))
+  (add-hook 'exwm-randr-screen-change-hook
+	    (lambda ()
+	      (start-process-shell-command
+	       "xrandr" nil "xrandr --output LVDS1 --right-of VGA1 --auto")))
+  (exwm-randr-enable)
+#+end_src
+* Config edit/reload
+** Edit
+#+begin_src emacs-lisp :tangle yes
+  (defun config-visit ()
+    (interactive)
+    (find-file "~/.emacs.d/config.org"))
+  (global-set-key (kbd "C-c e") 'conifg-visit)
+#+end_src
+** Relaod
+#+begin_src emacs-lisp :tangle yes
+  (defun conifg-reload ()
+    (interactive)
+    (org-babel-load-file (expand-file-name "~/.emacs.d/config.org")))
+  (global-set-key (kbd "C-c r") 'config-reload)
+#+end_src
+* C
+#+begin_src emacs-lisp :tangle yes
+  (use-package company
+    :ensure t
+    :diminish company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "M-n") nil)
+    (define-key company-active-map (kbd "M-p") nil)
+    (define-key company-active-map (kbd "C-n") #'company-select-next)
+    (define-key company-active-map (kbd "C-p") #'company-select-previous))
+
+  (use-package company-irony
+    :ensure t
+    :config
+    (require 'company)
+    (add-to-list 'company-backends 'company-irony))
+
+  (use-package irony
+    :ensure t
+    :config
+    (add-hook 'c-mode-hook 'irony-mode)
+    (add-hook 'c++-mode-hook 'irony-mode)
+    (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+    
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  ;(with-eval-after-load 'company
+   ; (add-hook 'c-mode 'company-mode)
+    ;(add-hook 'c++-mode 'company-mode))
+#+end_src
+* Dashboard
+#+begin_src emacs-lisp :tangle yes
+(use-package dashboard
+    :ensure t
+    :diminish dashboard-mode
+    :config
+    (setq dashboard-banner-logo-title "emacs")
+    (setq dashboard-startup-banner "~/pix/tmp/youjo_senki_emacs.png")
+    (setq dashboard-items '((recents  . 10)
+                            (bookmarks . 10)))
+    (dashboard-setup-startup-hook))
+#+end_src
+* LaTeX
+** Pdf-Tools
+#+begin_src emacs-lisp :tangle yes
+  (use-package pdf-tools
+    :ensure t
+    :config
+    (pdf-tools-install)
+    (setq-default pdf-view-display-size 'fit-page))
+#+end_src
+** AucTeX
+#+begin_src emacs-lisp :tangle yes
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+#+end_src

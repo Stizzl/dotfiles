@@ -1,5 +1,4 @@
 source $HOME/.prompt/zsh_prompt
-# PS1=" %{$fg[blue]%}$(pwd | sed "s|*./||")%{$fg[white]%} > "
 
 alias ls="ls --color=auto"
 alias cp="cp -rv"
@@ -30,8 +29,8 @@ autoload -U colors && colors
 # PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 
 # History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete:
@@ -90,4 +89,5 @@ zplugin load zsh-users/zsh-autosuggestions
     bindkey '^ ' autosuggest-accept
 zplugin load zsh-users/zsh-completions
 zplugin load zsh-users/zsh-history-substring-search
+zplugin load hlissner/zsh-autopair
 zplugin load zsh-users/zsh-syntax-highlighting
