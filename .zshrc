@@ -20,6 +20,7 @@ alias m="make && sudo make install"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
+alias lf="/usr/bin/lf -last-dir-path=$PWD"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
@@ -74,6 +75,12 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+function lf_widget {
+    /usr/bin/lf
+}
+zle -N lf_widget
+bindkey '^o' lf_widget
 
 # From -inputrc
 bindkey '^j' history-search-forward

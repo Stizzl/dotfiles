@@ -1,15 +1,15 @@
-"    __              __        _
-"   / / __   ___  ___\ \__   _(_)_ __ ___       _ __ ___
-"  | | '_ \ / _ \/ _ \| \ \ / / | '_ ` _ \ ____| '__/ __|
-"  | | | | |  __/ (_) | |\ V /| | | | | | |____| | | (__
-"  | |_| |_|\___|\___/| | \_/ |_|_| |_| |_|    |_|  \___|
-"   \_\              /_/
+"    __     __       _
+"   | _| __|_ |_   _(_)_ __ ___    _ __ ___
+"   | | '_ \| \ \ / / | '_ ` _ \  | '__/ __|
+"   | | | | | |\ V /| | | | | | |_| | | (__
+"   | |_| |_| | \_/ |_|_| |_| |_(_)_|  \___|
+"   |__|   |__|
 
 " set-commands {{{
 
 set encoding=utf-8
-set relativenumber number
-" set numberwidth=2
+set number
+set relativenumber 
 set expandtab
 set tabstop=4
 set shiftwidth=4
@@ -18,14 +18,19 @@ set nobackup
 set splitbelow splitright
 set cursorline
 set cursorcolumn
-"set nowrap
+set colorcolumn=80
 set updatetime=1000
-set path+=**	"find will find subfolders outside your working tree
-set wildmenu	"tabmenu
-set lazyredraw  "doesn't update screen when executing a macro or script
+set path+=**	
+set wildmenu	
+set lazyredraw  
 set hlsearch
-set incsearch
 set spelllang=en,de
+set autoread
+set autoindent
+set smartindent
+set hidden
+set incsearch
+set inccommand=nosplit
 
 " }}}
 
@@ -40,25 +45,22 @@ call vundle#begin()
     Plugin 'airblade/vim-gitgutter'
     Plugin 'junegunn/goyo.vim'
     Plugin 'junegunn/limelight.vim'
-	Plugin 'junegunn/fzf.vim'
     Plugin 'chase/focuspoint-vim'
     Plugin 'jiangmiao/auto-pairs'
-    Plugin 'PotatoesMaster/i3-vim-syntax'
     Plugin 'xuhdev/vim-latex-live-preview'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'mhinz/vim-startify'
     Plugin 'scrooloose/nerdtree'
-    Plugin 'axvr/photon.vim'
     Plugin 'SirVer/ultisnips'
-    " Plugin 'honza/vim-snippets'
+    Plugin 'honza/vim-snippets'
     Plugin 'Shougo/deoplete.nvim'
     Plugin 'tomtom/tcomment_vim'
 	Plugin 'easymotion/vim-easymotion'
-    " Plugin 'lervag/vimtex'
+    Plugin 'lervag/vimtex'
     Plugin 'dracula/vim'
+    Plugin 'machakann/vim-highlightedyank'
 call vundle#end()
-
 
 " }}}
 
@@ -127,8 +129,6 @@ let g:fzf_layout = { 'down': '~33%' }
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-" set conceallevel=1
-" let g:tex_conceal='abdmg'
 
 " easymotion
 let g:EasyMotion_keys = "asdfghjkl"
@@ -138,12 +138,16 @@ let g:EasyMotion_keys = "asdfghjkl"
 " color-scheme{{{
 
 colorscheme dracula
-" hi! Normal ctermbg=NONE
-" hi! NonText ctermbg=NONE
 
 augroup vimrc
     autocmd!
-    autocmd ColorScheme * highlight Normal ctermbg=NONE | highlight NonText ctermbg=NONE | highlight CursorLine ctermbg=NONE | highlight FoldColumn ctermfg=238 ctermbg=NONE | highlight Folded ctermfg=61 ctermbg=NONE
+    autocmd ColorScheme * highlight Normal ctermbg=NONE 
+	autocmd ColorScheme * highlight NonText ctermbg=NONE 
+	autocmd ColorScheme * highlight CursorLine ctermbg=NONE 
+	autocmd ColorScheme * highlight FoldColumn ctermfg=238 ctermbg=NONE 
+	autocmd ColorScheme * highlight Folded ctermfg=61 ctermbg=NONE 
+	autocmd ColorScheme * highlight ColorColumn ctermfg=1 ctermbg=NONE 
+	autocmd ColorScheme * highlight TermCursorNC ctermbg=240
 augroup END
 
 " }}}
@@ -153,18 +157,13 @@ augroup END
 let mapleader=" "
 let maplocalleader=" "
 
+" unwanted behaivor from easymotion
+
 map <leader>m :!echo yo
 nmap s <Plug>(easymotion-s)
 
-" Change split navigation
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-tmap <C-h> <Esc><C-w>h
-tmap <C-j> <Esc><C-w>j
-tmap <C-k> <Esc><C-w>k
-tmap <C-l> <Esc><C-w>l
+" :W sudo saves the file 
+command! W w !sudo tee % > /dev/null
 
 " function keys
 map <F1> :Goyo<CR>:Limelight<CR>
@@ -182,10 +181,14 @@ map <F13> :Goyo!<CR>:Limelight!<CR>
 map <M-v> <Esc>"+pa
 map <C-t> :vs term://zsh<CR>a
 
-tmap <Esc> <C-\><C-n><Esc><CR>
+tnoremap <Esc> <C-\><C-n>
+tnoremap <A-i> <Esc>
 
-vmap <silent> < <gv
-vmap <silent> > >gv
+vnoremap <silent> < <gv
+vnoremap <silent> > >gv
+" vnoremap <silent> y mz:yank<CR>`z
+" vnoremap <silent> Y mz:yank +<CR>`z
+
 nmap <silent> <Esc> :noh<CR>
 
 noremap <silent> <S-j> <Esc>:m +1<CR>
@@ -210,6 +213,18 @@ autocmd BufWritePost *.bashrc silent! !source ~/.bashrc
 "autocmd FileType plaintex :set filetype=tex
 
 noremap <leader>e :write tmp.vim<CR>:source %<CR>:!rm %<CR><CR>
+
+" buffers
+noremap <leader>b :BufferJumpList<CR>
+noremap <leader>x :BufferKillList<CR>
+
+" tabs
+noremap <C-h> <C-w>W
+noremap <C-l> <C-w>w
+noremap <C-j> :tabprevious<CR>
+noremap <C-k> :tabnext<CR>
+noremap <C-x>0 <C-w>c
+noremap <C-x>1 <C-w>w<C-w>c<C-w>W
 
 " }}}
 
