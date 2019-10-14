@@ -1,8 +1,4 @@
-#show-read-feeds no
 auto-reload yes
-
-#external-url-viewer "urlscan -dc -r 'linkhandler {}'"
-external-url-viewer "qutebrowser"
 
 bind-key j down
 bind-key k up
@@ -31,9 +27,6 @@ color listfocus_unread yellow default bold
 color info red black bold
 color article cyan default
 
-# browser "qutebrowser %u"
-#macro , open-in-browser
-#macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
-macro t set browser "transmission-remote -a %u"; open-in-browser ; set browser "elinks %u"
-macro y set browser "mpv %u"; open-in-browser ; set browser "elinks %u"
-macro Y set browser "cd ~/ytb && youtube-dl -q --audio-format best %u & disown && notify-send YouTube-Video finished downloading"; open-in-browser ; set browser "elinks %u"
+macro t set browser "transmission-remote -a %u"; open-in-browser ; set browser "qutebrowser %u"
+macro y set browser "mpv %u"; open-in-browser ; set browser "qutebrowser %u"
+macro Y set browser "cd ~/ytb && youtube-dl -q --audio-format best %u & disown && notify-send YouTube-Video finished downloading"; open-in-browser ; set browser "qutebrowser %u"

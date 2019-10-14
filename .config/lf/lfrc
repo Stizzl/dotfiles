@@ -9,6 +9,12 @@ map x $$f
 map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
+map gv cd ~/vid/ssd
+map gc cd ~/.config
+map gy cd ~/ytb
+map gb cd ~/bin
+map gs cd ~/.scripts
+map gt cd ~/tmp
 
 cmd open ${{
     filename=$(basename -- "$fx")

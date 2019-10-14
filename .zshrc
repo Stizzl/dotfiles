@@ -21,6 +21,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 alias lf="/usr/bin/lf -last-dir-path=$PWD"
+alias tmux="tmux -2"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}

@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 sync && \
-    bash -c "echo 1 | tee sudo /proc/sys/vm/drop_caches"
+    sudo bash -c 'echo 1 > /proc/sys/vm/drop_caches'

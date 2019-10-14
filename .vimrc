@@ -60,6 +60,7 @@ call vundle#begin()
     Plugin 'lervag/vimtex'
     Plugin 'dracula/vim'
     Plugin 'machakann/vim-highlightedyank'
+    Plugin 'christoomey/vim-tmux-navigator'
 call vundle#end()
 
 " }}}
@@ -90,15 +91,14 @@ let g:startify_update_oldfiles = 1
 let g:sidebar_direction = ''
 let g:NERDTreeWinPos=get(g:,'NERDTreeWinPos',sidebar_direction)
 let g:NERDTreeShowHidden = 1
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " limelight
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_default_coefficient = 0.7
-
-" auto-pairs
-"let g:AutoPairsFlyMode = 1
-"let g:AutoPairsShortcutBackInsert = '<M-b>'
 
 " latex-live-preview
 let g:livepreview_previewer = 'zathura'
@@ -108,11 +108,8 @@ let g:livepreview_cursorhold_recompile = 0
 let g:airline_theme = 'dracula'
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = 'BN: %{bufnr("%")}'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " ultisnips
-" let g:UltiSnipsExpandTrigger="<C-b>"
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -121,9 +118,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
-
-" fzf
-let g:fzf_layout = { 'down': '~33%' }
 
 " vimtex
 let g:tex_flavor='latex'
@@ -157,8 +151,6 @@ augroup END
 let mapleader=" "
 let maplocalleader=" "
 
-" unwanted behaivor from easymotion
-
 map <leader>m :!echo yo
 nmap s <Plug>(easymotion-s)
 
@@ -174,7 +166,7 @@ map <F7> :setlocal spell! spelllang=en_us<CR>
 map <F9> :colorscheme focuspoint<CR>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 map <F11> :set foldmethod=indent<CR>
-map <F12> :bd!<CR>:find ~/.vimrc<CR>
+map <F12> :e ~/.vimrc<CR>
 tmap <F12> <Esc>:bd!<CR>:find ~/.vimrc<CR>
 map <F13> :Goyo!<CR>:Limelight!<CR>
 
@@ -217,14 +209,6 @@ noremap <leader>e :write tmp.vim<CR>:source %<CR>:!rm %<CR><CR>
 " buffers
 noremap <leader>b :BufferJumpList<CR>
 noremap <leader>x :BufferKillList<CR>
-
-" tabs
-noremap <C-h> <C-w>W
-noremap <C-l> <C-w>w
-noremap <C-j> :tabprevious<CR>
-noremap <C-k> :tabnext<CR>
-noremap <C-x>0 <C-w>c
-noremap <C-x>1 <C-w>w<C-w>c<C-w>W
 
 " }}}
 

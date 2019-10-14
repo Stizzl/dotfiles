@@ -25,6 +25,7 @@ config.bind('<Space>dh', 'hint links run download -d ~/pix/hen {hint-url}')
 config.bind('<Space>dm', 'hint links run download -d ~/pix/meme {hint-url}')
 config.bind('<Space>dt', 'hint links run download -d ~/pix/tmp {hint-url}')
 config.bind('<Space>dc', 'hint links run download -d ~/pix/moe {hint-url}')
+config.bind('<Space>dy', 'hint links run spawn youtube-dl "{hint-url}"')
 
 # Basics
 config.set('content.notifications', False)

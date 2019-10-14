@@ -5,9 +5,8 @@ export TERMINAL="st"
 export PAGER="most"
 export PATH="$HOME/bin:$PATH"
 export HISTSIZE=""
-#export LANG="de_DE.UTF-8" # sets GERMAN UNICODE (öüä §„“)
 export LANG="en_US.UTF-8"
-#export XDG_CONFIG_HOME="$HOME/.config"
+export TERM="xterm-256color" # tmux zsh-syntax-highlighting
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

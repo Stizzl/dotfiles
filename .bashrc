@@ -2,7 +2,7 @@ source $HOME/.prompt/bash_prompt
 
 shopt -s autocd
 
-alias ls="ls --color=auto" # adds color to ls
+alias ls="ls --color=auto"
 alias cp="cp -rv"
 alias rm="rm -rv"
 alias mv="mv -v"
@@ -14,17 +14,16 @@ alias sn="shutdown now"
 alias info="neofetch"
 alias up="sudo pacman -Syu --color auto --noconfirm"
 alias p="sudo pacman -S"
-alias co="nvim ~/.bashrc"
+alias co="nvim ~/.zshrc"
 alias vco="nvim ~/.vimrc"
 alias ico="nvim ~/.config/i3/config"
-alias restart="systemctl restart NetworkManager"
 alias ll="ls -alh"
-alias sc="nvim ~/.config/bspwm/sxhkdrc"
 alias m="make && sudo make install"
-alias e="emacs"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
+alias lf="/usr/bin/lf -last-dir-path=$PWD"
+alias tmux="tmux -2"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
