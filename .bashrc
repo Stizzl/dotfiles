@@ -3,7 +3,7 @@ source $HOME/.prompt/bash_prompt
 shopt -s autocd
 
 alias ls="ls --color=auto"
-alias cp="cp -rv"
+alias cp="cp -rvi"
 alias rm="rm -rv"
 alias mv="mv -v"
 alias mkdir="mkdir -pv"
@@ -11,12 +11,10 @@ alias v="nvim"
 alias c="clear"
 alias q="exit"
 alias sn="shutdown now"
-alias info="neofetch"
 alias up="sudo pacman -Syu --color auto --noconfirm"
 alias p="sudo pacman -S"
-alias co="nvim ~/.zshrc"
+alias co="nvim ~/.bashrc"
 alias vco="nvim ~/.vimrc"
-alias ico="nvim ~/.config/i3/config"
 alias ll="ls -alh"
 alias m="make && sudo make install"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

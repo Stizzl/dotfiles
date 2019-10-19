@@ -154,10 +154,6 @@ let maplocalleader=" "
 map <leader>m :!echo yo
 nmap s <Plug>(easymotion-s)
 
-" :W sudo saves the file 
-command! W w !sudo tee % > /dev/null
-
-" function keys
 map <F1> :Goyo<CR>:Limelight<CR>
 map <F2> :LLPStartPreview<CR>
 map <F3> :NERDTreeToggle<CR>
@@ -178,8 +174,6 @@ tnoremap <A-i> <Esc>
 
 vnoremap <silent> < <gv
 vnoremap <silent> > >gv
-" vnoremap <silent> y mz:yank<CR>`z
-" vnoremap <silent> Y mz:yank +<CR>`z
 
 nmap <silent> <Esc> :noh<CR>
 
@@ -191,24 +185,26 @@ vnoremap <silent> <S-k> :m -2<CR>gv
 noremap <silent> j gj
 noremap <silent> k gk
 
-" When I accidentally type :Q
 cmap Q quit
 
 noremap <leader>u :UltiSnipsEdit<CR>G
-
-"autocmd BufEnter *.tex silent! !pdflatex %
-autocmd BufWritePost *vimisgreat.gg silent! !echo % | sed "s/\.gg//" > ~/yoyoma
-autocmd BufWritePost *.sh silent! !chmod +x %
-autocmd BufWritePost *.bashrc silent! !source ~/.bashrc
-"autocmd BufEnter *.tex LLPStartPreview 
-"autocmd BufEnter *.tex !sleep 1s && xdotool key super+shift+j &
-"autocmd FileType plaintex :set filetype=tex
-
-noremap <leader>e :write tmp.vim<CR>:source %<CR>:!rm %<CR><CR>
-
-" buffers
 noremap <leader>b :BufferJumpList<CR>
 noremap <leader>x :BufferKillList<CR>
+
+noremap <silent> D :s/.*//<CR>:noh<CR>
+noremap <silent> C :s/.*//<CR>:noh<CR>a
+
+onoremap c i{
+onoremap b i[
+onoremap p i(
+onoremap s i"
+onoremap q i'
+onoremap t i<
+
+inoremap <C-c>h <LEFT>
+inoremap <C-c>j <DOWN>
+inoremap <C-c>k <UP>
+inoremap <C-c>l <RIGHT>
 
 " }}}
 

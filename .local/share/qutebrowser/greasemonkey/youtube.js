@@ -36,7 +36,7 @@ document.getElementById("footer-container").remove();
 // }
 
 // yt-lockup-byline yt-ui-ellipsis yt-ui-ellipsis-2 -- the same as yt-lockup color
-
+//
 // yt-lockup color: #fff
 // yt-ui-ellipsis background-color: #1a1a1a
 // yt-lockup-title  color: #af5fd7;

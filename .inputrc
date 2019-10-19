@@ -1,7 +1,5 @@
 $include /etc/inputrc
 
-# set bell-style none
-
 set keyseq-timeout 1
 set editing-mode vi
 set show-mode-in-prompt on
@@ -42,6 +40,8 @@ set menu-complete-display-prefix On
 "\C-j": history-search-forward
 "\C-x": kill-whole-line
 "\C-y": clear-screen
+
+"\C-o": "lf\r"
 
 "\es": "\eOHsudo \eOF"
 "\ew": "\eOHwhile :; do \eOF ; done\e[1;5D\eOD\eOD\eOD"

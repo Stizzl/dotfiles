@@ -1,6 +1,6 @@
 export BACKGROUND="$HOME/pix/wal/$(ls -1 $HOME/pix/wal | sort -R | head -1)"
 export EDITOR="nvim"
-export BROWSER="firefox"
+export BROWSER="qutebrowser"
 export TERMINAL="st"
 export PAGER="most"
 export PATH="$HOME/bin:$PATH"

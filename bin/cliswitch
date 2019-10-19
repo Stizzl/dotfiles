@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROMPT=$(printf "vifm\ntremc\nhtop\nncmpcpp\nnewsboat" | rofi -dmenu -theme default -p "cli")
+PROMPT=$(printf "lf\ntremc\nhtop\nnewsboat" | rofi -dmenu -theme default -p "cli")
 
 [ -z $PROMPT ] && exit
 
