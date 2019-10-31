@@ -1,3 +1,0 @@
-#!/bin/bash
-dir=$HOME/.config/st/
-make $dir && sudo make $dir

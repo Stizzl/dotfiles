@@ -1,3 +1,0 @@
-#!/bin/bash
-selected=$(ls "$HOME/bin" | rofi -dmenu -theme default -p "autoscript: ")
-[[ -z $select ]] && exit

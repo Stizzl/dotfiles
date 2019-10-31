@@ -47,7 +47,7 @@ call vundle#begin()
     Plugin 'junegunn/limelight.vim'
     Plugin 'chase/focuspoint-vim'
     Plugin 'jiangmiao/auto-pairs'
-    Plugin 'xuhdev/vim-latex-live-preview'
+    " Plugin 'xuhdev/vim-latex-live-preview'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'mhinz/vim-startify'
@@ -120,9 +120,10 @@ let g:UltiSnipsEditSplit="vertical"
 let g:deoplete#enable_at_startup = 1
 
 " vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_mode = 0
+let g:vimtex_latexmk_continuous = 1
 
 " easymotion
 let g:EasyMotion_keys = "asdfghjkl"
@@ -140,7 +141,7 @@ augroup vimrc
 	autocmd ColorScheme * highlight CursorLine ctermbg=NONE 
 	autocmd ColorScheme * highlight FoldColumn ctermfg=238 ctermbg=NONE 
 	autocmd ColorScheme * highlight Folded ctermfg=61 ctermbg=NONE 
-	autocmd ColorScheme * highlight ColorColumn ctermfg=1 ctermbg=NONE 
+	autocmd ColorScheme * highlight ColorColumn ctermfg=203 ctermbg=NONE 
 	autocmd ColorScheme * highlight TermCursorNC ctermbg=240
 augroup END
 
@@ -206,11 +207,7 @@ inoremap <C-c>j <DOWN>
 inoremap <C-c>k <UP>
 inoremap <C-c>l <RIGHT>
 
-" }}}
-
-" settings {{{
-
-let g:tex_flavor = "latex"
+inoremap <C-s> <Esc>:w<CR>a
 
 " }}}
 

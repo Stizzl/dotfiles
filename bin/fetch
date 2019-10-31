@@ -1,0 +1,44 @@
+#!/bin/bash
+#       /\         finn@Rajang
+#      /  \        os     Arch Linux
+#     /\   \       host   4291W3B ThinkPad X220
+#    /      \      kernel 5.3.4-arch1-1-ARCH
+#   /   ,,   \     uptime 6h 48m
+#  /   |  |  -\    pkgs   1020
+# /_-''    ''-_\   memory 2140M / 7842M
+
+function Quote {
+    printf "MemePad"
+}
+
+function Kernel {
+    printf "kernel\t"
+    uname -a | awk '{print $3}'
+}
+
+function Uptime {
+    printf "uptime\t"
+    uptime | awk '{print $3}' | sed "s/,//"
+}
+
+function Packages {
+    printf "pkgs\t"
+    pacman -Q | wc -l
+}
+
+function Memory {
+    printf "memory"
+    echo "$(free -m | head -2 | tail -1 | awk '{print $3}') / $(free -m | head -2 | tail -1 | awk '{print $2}')"
+}
+
+function Line {
+    echo -n "---------------"
+}
+
+echo "       /\         $(Quote)"
+echo "      /  \        $(Line)"
+echo "     /\   \       $(Kernel)"
+echo "    /      \      $(Uptime)"
+echo "   /   ,,   \     $(Packages)"
+echo "  /   |  |  -\    $(Memory)"
+echo " /_-''    ''-_\   $(Line)"

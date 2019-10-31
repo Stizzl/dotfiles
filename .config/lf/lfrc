@@ -16,6 +16,7 @@ map gb cd ~/bin
 map gs cd ~/.scripts
 map gt cd ~/tmp
 map gp cd ~/pix
+map ge cd ~/etc
 
 cmd open ${{
     filename=$(basename -- "$fx")

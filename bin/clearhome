@@ -1,0 +1,7 @@
+#!/bin/bash
+FILES=$(find $HOME -maxdepth 1 \( ! -regex '.*/\..*' \)  -type f)
+
+cd $HOME
+notify-send "$PWD"
+[[ "$PWD" -eq "$HOME" ]] && notify-send "etst"
+# mv $FILES $HOME/tmp

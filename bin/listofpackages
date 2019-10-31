@@ -1,0 +1,4 @@
+#!/bin/bash
+FILE="$HOME/.lop"
+
+pacman -Q | awk '{print $1}' > $FILE

@@ -41,6 +41,7 @@ set menu-complete-display-prefix On
 "\C-x": kill-whole-line
 "\C-y": clear-screen
 
+"\C-g": "\r"
 "\C-o": "lf\r"
 
 "\es": "\eOHsudo \eOF"

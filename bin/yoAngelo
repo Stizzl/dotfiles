@@ -1,4 +1,0 @@
-#!/bin/sh
-
-X=$(expr X + 1)
-echo $X
