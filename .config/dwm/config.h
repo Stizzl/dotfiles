@@ -5,8 +5,10 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 20;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "hack nerd font:size=11" };
-static const char dmenufont[]       = "hack nerd font:size=11";
+/* static const char *fonts[]          = { "hack nerd font:size=11" }; */
+static const char *fonts[]          = { "Terminus:size=11" };
+/* static const char dmenufont[]       = "hack nerd font:size=11"; */
+static const char dmenufont[]       = "Terminus:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -79,8 +81,54 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "scratchpad_tmux", NULL };
+static const char *getmouselocationcmd[] = { "getmouselocation", NULL };
+static const char *qutebrowsercmd[] = { "qutebrowser", NULL };
+static const char *audiomute[] = { "pamixer", "-t", NULL };
+static const char *audiosub5[] = { "pamixer", "-d", "5", NULL };
+static const char *audiosub10[] = { "pamixer", "-d", "10", NULL };
+static const char *audioadd5[] = { "pamixer", "-i", "5", NULL };
+static const char *audioadd10[] = { "pamixer", "-i", "10", NULL };
+static const char *cliswitchcmd[] = { "cliswitch", NULL };
+static const char *roficmd[] = { "rofi", "-show", "run", "-theme", "default", NULL };
+static const char *setxkbmapcmd[] = { "setxkbmap", "-layout", "de", "-option", "caps:ctrl_modifier", "&&", "xset", "r", "rate", "300", "50", NULL };
+static const char *loginmenucmd[] = { "loginmenu", NULL };
+static const char *clearcachecmd[] = { "sudo", "/home/finn/.scripts/drop_cache.sh", "&", "disown", NULL };
 
+/*
+Pulled from sxhkdrc
+
+super + x
+    getmouselocation
+super + g
+    qutebrowser
+XF86AudioMute
+    pamixer -t
+XF86AudioLowerVolume
+    pamixer -d 5 && refbar
+shift + XF86AudioLowerVolume
+    pamixer -d 10 && refbar
+XF86AudioRaiseVolume
+    pamixer -i 5 && refbar
+shift + XF86AudioRaiseVolume
+    pamixer -i 10 && refbar
+control + XF86AudioRaiseVolume
+    pamixer --allow-boost -i 5 && refbar
+control + shift + XF86AudioRaiseVolume
+    pamixer --allow-boost -i 10 && refbar
+super + v
+    cliswitch
+super + d
+    rofi -show run -theme default
+super + r
+    setxkbmap -layout de -option caps:ctrl_modifier && xset r rate 300 50
+Pause
+    loginmenu
+super + e
+    emacs
+super + p
+    sudo /home/finn/.scripts/drop_cache.sh & disown
+*/
 #include "movestack.c"
 
 static Key keys[] = {

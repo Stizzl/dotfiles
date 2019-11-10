@@ -3,7 +3,7 @@
 ~/.scripts/dwmrefresh.sh &
 ~/.scripts/display.sh &
 ~/.scripts/headphonejack.sh &
-start_transmission &
+# start_transmission &
 unclutter --timeout 1 &
 xset r rate 300 50 &
 xset m 0.1 0 &

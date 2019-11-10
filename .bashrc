@@ -22,6 +22,7 @@ alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 alias lf="/usr/bin/lf -last-dir-path=$PWD"
 alias tmux="tmux -2"
+alias vim="vim -u NONE"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}

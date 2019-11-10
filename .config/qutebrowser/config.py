@@ -30,6 +30,8 @@ config.bind('<Space>dm', 'hint links run download -d ~/pix/moe "{hint-url}"')
 config.bind('<Space>dc', 'hint links run download -d ~/pix/chan "{hint-url}"')
 config.bind('<Space>dp', 'hint links run download -d ~/pdf "{hint-url}"')
 config.bind('<Space>dy', 'hint links run spawn --verbose youtube-dl "{hint-url}"')
+config.bind('<Space>a', 'spawn --verbose htmltopdf "{url}"')
+config.bind('ac', 'hint links run spawn --verbose yt-channel-id "{hint-url}"')
 
 # Basics
 config.set('content.notifications', False)

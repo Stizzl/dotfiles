@@ -17,6 +17,7 @@ map gs cd ~/.scripts
 map gt cd ~/tmp
 map gp cd ~/pix
 map ge cd ~/etc
+map gd cd ~/pdf
 
 cmd open ${{
     filename=$(basename -- "$fx")
@@ -37,14 +38,14 @@ map r push :rename<space>
 
 cmd trash ${{
     set -f
-    mkdir -p ~/.trash
     mv -f $fx ~/.trash
 }}
 
 cmd clear_trash ${{
     set -f
-    rm -rf ~/.trash
+    rm -rf ~/.trash/*
 }}
+map <c-x> trash
 
 cmd extract ${{
     set -f
@@ -74,4 +75,20 @@ cmd zip ${{
     rm -rf $1
 }}
 
-map <c-x> trash
+cmd sxiv ${{
+    set -f
+    sxiv -a $fx
+}}
+map <c-s> sxiv 
+
+cmd video ${{
+    set -f
+    case $fx in
+        *.webm) mpv $fx;;
+    esac
+}}
+cmd mpv ${{
+    set -f
+    echo $fx | sed -E -e "s/\w*(\.webm+)//g" | xargs mpv
+}}
+map <c-v> mpv

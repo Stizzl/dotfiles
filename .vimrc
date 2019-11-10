@@ -47,7 +47,6 @@ call vundle#begin()
     Plugin 'junegunn/limelight.vim'
     Plugin 'chase/focuspoint-vim'
     Plugin 'jiangmiao/auto-pairs'
-    " Plugin 'xuhdev/vim-latex-live-preview'
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
     Plugin 'mhinz/vim-startify'
@@ -195,19 +194,20 @@ noremap <leader>x :BufferKillList<CR>
 noremap <silent> D :s/.*//<CR>:noh<CR>
 noremap <silent> C :s/.*//<CR>:noh<CR>a
 
-onoremap c i{
-onoremap b i[
-onoremap p i(
-onoremap s i"
-onoremap q i'
-onoremap t i<
-
+" onoremap c i{
+" onoremap b i[
+" onoremap p i(
+" onoremap s i"
+" onoremap q i'
+" onoremap t i<
+"
 inoremap <C-c>h <LEFT>
 inoremap <C-c>j <DOWN>
 inoremap <C-c>k <UP>
 inoremap <C-c>l <RIGHT>
 
 inoremap <C-s> <Esc>:w<CR>a
+nnoremap <C-s> :w<CR>
 
 " }}}
 
