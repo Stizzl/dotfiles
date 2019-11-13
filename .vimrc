@@ -209,6 +209,9 @@ inoremap <C-c>l <RIGHT>
 inoremap <C-s> <Esc>:w<CR>a
 nnoremap <C-s> :w<CR>
 
+noremap ö o<Esc>
+noremap Ö O<Esc>
+
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

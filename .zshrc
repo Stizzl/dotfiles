@@ -22,9 +22,13 @@ alias afk="time afk"
 alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 alias lf="/usr/bin/lf -last-dir-path=$PWD"
 alias tmux="tmux -2"
+alias vim="vim -u NONE"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
-s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
+s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | fzf | xargs -r nvim ;}
+cd() { builtin cd "$@" && ls -F ;}
+
+#{{{
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -99,3 +103,7 @@ zplugin load zsh-users/zsh-completions
 zplugin load zsh-users/zsh-history-substring-search
 zplugin load hlissner/zsh-autopair
 zplugin load zsh-users/zsh-syntax-highlighting
+
+#}}}
+
+# vim:foldmethod=marker:foldlevel=0

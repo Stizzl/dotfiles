@@ -15,7 +15,7 @@ alias up="sudo pacman -Syu --color auto --noconfirm"
 alias p="sudo pacman -S"
 alias co="nvim ~/.bashrc"
 alias vco="nvim ~/.vimrc"
-alias ll="ls -alh"
+alias ll="ls -Alh"
 alias m="make && sudo make install"
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias afk="time afk"
@@ -25,7 +25,8 @@ alias tmux="tmux -2"
 alias vim="vim -u NONE"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
-s() { du -a ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | awk '{print $2}' | fzf | xargs -r nvim ;}
+s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | fzf | xargs -r nvim ;}
+cd() { builtin cd "$@" && ls -F ;}
 
 #{{{
 __fzf_history ()
