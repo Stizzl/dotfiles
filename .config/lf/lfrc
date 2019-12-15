@@ -9,6 +9,7 @@ map x $$f
 map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
+map R $cd $PWD
 map gv cd ~/vid/ssd
 map gc cd ~/.config
 map gy cd ~/ytb

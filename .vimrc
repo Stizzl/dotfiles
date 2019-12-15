@@ -60,6 +60,8 @@ call vundle#begin()
     Plugin 'dracula/vim'
     Plugin 'machakann/vim-highlightedyank'
     Plugin 'christoomey/vim-tmux-navigator'
+    Plugin 'ludovicchabant/vim-gutentags'
+    Plugin 'vimwiki/vimwiki'
 call vundle#end()
 
 " }}}
@@ -126,6 +128,9 @@ let g:vimtex_latexmk_continuous = 1
 
 " easymotion
 let g:EasyMotion_keys = "asdfghjkl"
+
+" vimwiki
+let g:vimwiki_list = [{'path':'~/.vim/vimwiki','syntax': 'markdown', 'ext': '.md'}]
 
 "}}}
 
@@ -211,6 +216,9 @@ nnoremap <C-s> :w<CR>
 
 noremap ö o<Esc>
 noremap Ö O<Esc>
+
+
+autocmd VimLeavePre *.tex !latexmk -C %
 
 " }}}
 

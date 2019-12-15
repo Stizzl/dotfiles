@@ -29,7 +29,7 @@ super + shift + F12
 super + v
     cliswitch
 super + d
-    rofi -show run -theme default
+    dmenu_run
 super + r
     setxkbmap -layout de -option caps:ctrl_modifier && xset r rate 300 50
 Pause
@@ -46,3 +46,5 @@ super + e
     emacs
 super + p
     sudo /home/finn/.scripts/drop_cache.sh & disown
+super + shift + e
+    systemctl hibernate

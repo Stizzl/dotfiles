@@ -12,7 +12,7 @@ alias c="clear"
 alias q="exit"
 alias sn="shutdown now"
 alias up="sudo pacman -Syu --color auto --noconfirm"
-alias p="sudo pacman -S"
+alias p="sudo pacman -S --color auto"
 alias co="nvim ~/.bashrc"
 alias vco="nvim ~/.vimrc"
 alias ll="ls -Alh"
@@ -23,10 +23,12 @@ alias voc="nvim ~/tex/english/englishVocabulary/voc.tex"
 alias lf="/usr/bin/lf -last-dir-path=$PWD"
 alias tmux="tmux -2"
 alias vim="vim -u NONE"
+alias cmus='tmux attach-session -t cmus 2>/dev/null || tmux new-session -A -D -s cmus "$(which cmus)"'
+alias cd..="cd .."
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
-s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | fzf | xargs -r nvim ;}
-cd() { builtin cd "$@" && ls -F ;}
+s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* ~/git/* | fzf | xargs -r nvim ;}
+cd() { builtin cd "$@" && ls ;}
 
 #{{{
 __fzf_history ()

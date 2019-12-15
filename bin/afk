@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 while :; do
-    xdotool mousemove 1 1
-    xdotool mousemove 1 2
+    xdotool mousemove_relative 1 0
+    xdotool mousemove_relative -- -1 0
     sleep 9m
 done

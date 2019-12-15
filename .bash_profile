@@ -1,7 +1,7 @@
 export EDITOR="nvim"
 export BROWSER="qutebrowser"
 export TERMINAL="st"
-export PAGER="most"
+export PAGER="less"
 export PATH="$HOME/bin:$PATH"
 export HISTSIZE=""
 export LANG="en_US.UTF-8"
