@@ -19,6 +19,7 @@ map gt cd ~/tmp
 map gp cd ~/pix
 map ge cd ~/etc
 map gd cd ~/pdf
+map gt cd ~/.trash
 
 cmd open ${{
     filename=$(basename -- "$fx")
@@ -88,8 +89,21 @@ cmd video ${{
         *.webm) mpv $fx;;
     esac
 }}
+
 cmd mpv ${{
     set -f
     echo $fx | sed -E -e "s/\w*(\.webm+)//g" | xargs mpv
 }}
 map <c-v> mpv
+
+cmd ls_count ${{
+    set -f
+    notify-send "$(ls -A | wc -l)"
+}}
+map a ls_count
+
+cmd ls_recursive_count ${{
+    set -f
+    notify-send "$(ls -RA | wc -l)"
+}}
+map A ls_recursive_count
