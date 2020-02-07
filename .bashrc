@@ -11,7 +11,7 @@ alias v="nvim"
 alias c="clear"
 alias q="exit"
 alias sn="shutdown now"
-alias up="sudo pacman -Syu --color auto --noconfirm"
+alias up="yay -Syu --color auto --noconfirm"
 alias p="sudo pacman -S --color auto"
 alias co="nvim ~/.bashrc"
 alias vco="nvim ~/.vimrc"
@@ -25,10 +25,24 @@ alias tmux="tmux -2"
 alias vim="vim -u NONE"
 alias cmus='tmux attach-session -t cmus 2>/dev/null || tmux new-session -A -D -s cmus "$(which cmus)"'
 alias cd..="cd .."
+alias diff="diff --color"
+alias am="sudo ~/.scripts/automount.sh"
+alias um="sudo umount ~/mnt"
+alias t="tremc"
+alias h="htop"
 
 pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
-s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* ~/git/* | fzf | xargs -r nvim ;}
+s() { find ~/.scripts ~/.config ~/bin ~/tex ~/git ~/dev -type f | fzf | xargs -r nvim ;}
 cd() { builtin cd "$@" && ls ;}
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
 
 #{{{
 __fzf_history ()

@@ -1,24 +1,2 @@
 #!/bin/sh
-function preexec() {
-  timer=${timer:-$SECONDS}
-}
-
-precmd() {
-    Pwd() {
-        x=$(pwd | sed "s|.*/||")
-
-        if [ "$x" = "finn" ]; then
-            printf "~"
-        else
-            printf "$x"
-        fi
-    }
-
-    PS1=" %{$fg[blue]%}$(Pwd)%{$fg[white]%} > "
-
-    if [ $timer ]; then
-        timer_show=$(($SECONDS - $timer))
-        export RPROMPT="%F{cyan}${timer_show}s %{$reset_color%}"
-        unset timer
-    fi
-}
+PS1="> "

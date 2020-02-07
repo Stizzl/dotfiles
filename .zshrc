@@ -28,6 +28,12 @@ pdflatex() { /usr/bin/pdflatex $@ && rm *.aux *.log ;}
 s() { find ~/.scripts/* ~/.config/* ~/bin/* ~/tex/* | fzf | xargs -r nvim ;}
 cd() { builtin cd "$@" && ls -F ;}
 
+setopt sharehistory
+setopt correct
+setopt correctall
+
+bindkey "^R" history-incremental-search-backward
+
 #{{{
 
 # Enable colors and change prompt:

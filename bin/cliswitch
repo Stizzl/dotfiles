@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 PROMPT=$(printf "lf\ntremc\nhtop\nnewsboat" | rofi -dmenu -theme default -p "cli")
 

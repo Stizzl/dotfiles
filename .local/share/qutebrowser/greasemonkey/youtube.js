@@ -10,7 +10,10 @@
 document.getElementById("header").remove();
 document.getElementById("masthead-positioner").remove();
 document.getElementById("content").style.top = "-50px"
+document.getElementById("content").style.left = "-125px"
 document.getElementById("footer-container").remove();
+document.getElementById("guide").remove();
+document.getElementsByClassName("yt-uix-expander")[0].className = "yt-uix-expander"
 // document.body.style.background = "#111"
 // document.getElementsByClassName("   yt-card  clearfix")[0].style.background = "#1a1a1a"
 //

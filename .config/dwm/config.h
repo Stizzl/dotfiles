@@ -82,53 +82,19 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "scratchpad_tmux", NULL };
-static const char *getmouselocationcmd[] = { "getmouselocation", NULL };
-static const char *qutebrowsercmd[] = { "qutebrowser", NULL };
-static const char *audiomute[] = { "pamixer", "-t", NULL };
-static const char *audiosub5[] = { "pamixer", "-d", "5", NULL };
-static const char *audiosub10[] = { "pamixer", "-d", "10", NULL };
-static const char *audioadd5[] = { "pamixer", "-i", "5", NULL };
-static const char *audioadd10[] = { "pamixer", "-i", "10", NULL };
-static const char *cliswitchcmd[] = { "cliswitch", NULL };
-static const char *roficmd[] = { "rofi", "-show", "run", "-theme", "default", NULL };
-static const char *setxkbmapcmd[] = { "setxkbmap", "-layout", "de", "-option", "caps:ctrl_modifier", "&&", "xset", "r", "rate", "300", "50", NULL };
-static const char *loginmenucmd[] = { "loginmenu", NULL };
-static const char *clearcachecmd[] = { "sudo", "/home/finn/.scripts/drop_cache.sh", "&", "disown", NULL };
+/* static const char *getmouselocationcmd[] = { "getmouselocation", NULL }; */
+/* static const char *qutebrowsercmd[] = { "qutebrowser", NULL }; */
+/* static const char *audiomute[] = { "pamixer", "-t", NULL }; */
+/* static const char *audiosub5[] = { "pamixer", "-d", "5", NULL }; */
+/* static const char *audiosub10[] = { "pamixer", "-d", "10", NULL }; */
+/* static const char *audioadd5[] = { "pamixer", "-i", "5", NULL }; */
+/* static const char *audioadd10[] = { "pamixer", "-i", "10", NULL }; */
+/* static const char *cliswitchcmd[] = { "cliswitch", NULL }; */
+/* static const char *roficmd[] = { "rofi", "-show", "run", "-theme", "default", NULL }; */
+/* static const char *setxkbmapcmd[] = { "setxkbmap", "-layout", "de", "-option", "caps:ctrl_modifier", "&&", "xset", "r", "rate", "300", "50", NULL }; */
+/* static const char *loginmenucmd[] = { "loginmenu", NULL }; */
+/* static const char *clearcachecmd[] = { "sudo", "/home/finn/.scripts/drop_cache.sh", "&", "disown", NULL }; */
 
-/*
-Pulled from sxhkdrc
-
-super + x
-    getmouselocation
-super + g
-    qutebrowser
-XF86AudioMute
-    pamixer -t
-XF86AudioLowerVolume
-    pamixer -d 5 && refbar
-shift + XF86AudioLowerVolume
-    pamixer -d 10 && refbar
-XF86AudioRaiseVolume
-    pamixer -i 5 && refbar
-shift + XF86AudioRaiseVolume
-    pamixer -i 10 && refbar
-control + XF86AudioRaiseVolume
-    pamixer --allow-boost -i 5 && refbar
-control + shift + XF86AudioRaiseVolume
-    pamixer --allow-boost -i 10 && refbar
-super + v
-    cliswitch
-super + d
-    rofi -show run -theme default
-super + r
-    setxkbmap -layout de -option caps:ctrl_modifier && xset r rate 300 50
-Pause
-    loginmenu
-super + e
-    emacs
-super + p
-    sudo /home/finn/.scripts/drop_cache.sh & disown
-*/
 #include "movestack.c"
 
 static Key keys[] = {
@@ -155,8 +121,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+	{ MODKEY,                       XK_space,  togglefloating, {0} },
+	{ MODKEY|ShiftMask,             XK_space,  spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },

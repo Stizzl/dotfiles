@@ -107,3 +107,9 @@ cmd ls_recursive_count ${{
     notify-send "$(ls -RA | wc -l)"
 }}
 map A ls_recursive_count
+
+cmd ls_recursive_select_count ${{
+    set -f
+    notify-send "$(ls -RA $fx | wc -l)"
+}}
+map <c-a> ls_recursive_select_count

@@ -15,8 +15,8 @@
 // }, false);
 
 var elem = document.getElementsByTagName("iframe")
-    for (index = elem.length - 1; index >= 0; index--) {
-    elem[index].style.display = "none";
+	for (index = elem.length - 1; index >= 0; index--) {
+		elem[index].style.display = "none";
 }
 
 // document.body.style.background = "#F0F"
